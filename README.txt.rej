@@ -1,9 +1,0 @@
-diff a/README.txt b/README.txt	(rejected hunks)
-@@ -10,7 +10,6 @@
- +
- +Changing CHUNK_WIDTH will increase the amount of terrain that will be seen without a performance hit.
- +
-- I haven't used source control that much, but I'm learning
- +I haven't used source control that much, but I'm learning
- +=======
- +There's still a lot to do...
