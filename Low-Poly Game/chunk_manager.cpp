@@ -87,8 +87,8 @@ void ChunkManager::Update(float x, float z) {
 		if (stop) break;
 	}
 	timer.Stop();
-	if(timer.GetDelta() > .005f)
-		std::cout << timer.GetDelta() << std::endl;
+	//if(timer.GetDelta() > .005f)
+	//	std::cout << timer.GetDelta() << std::endl;
 
 }
 

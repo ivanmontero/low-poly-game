@@ -14,7 +14,10 @@ uniform float far;
 
 out vec3 pos;
 out vec3 Normal;
-out vec3 vcolor;
+flat out vec3 vcolor;
+//out vec3 vcolor;
+
+// "Fans" possibly from way that triangles are made?
 
 float noise(vec2 p);
 
@@ -26,15 +29,34 @@ void main() {
 	float c = .1 * ( 2.0 * noise(vec2(position.x, position.z)) - 1.0);
 	//c = 0;
 
-	if((model * vec4(position, 1.0f)).y < -.2)
-		vcolor = vec3(0.2, 0.2, 1.0) + vec3(c * .25);
-	else
-		vcolor = Color + vec3(c);
+	float elevation = (model * vec4(position, 1.0f)).y;
+	float n = noise(vec2(position.x, position.z));
 
+	if(elevation < -5)	// Water
+		vcolor = vec3(0.2, 0.2, 1.0) + vec3(c * .25);
+	else if (elevation < 5) // lerp between water and sand
+		vcolor = vec3(mix(.2, 1, (elevation + 5) / 10), 
+					  mix(.2, 1, (elevation + 5) / 10),
+					  mix(.85, 1, 1 - (elevation + 5) / 10)) + vec3(c);
+	else if (elevation < 15)	// Sand
+		vcolor = vec3(1.0, 1.0, 0.85) + vec3(c);
+	else if (elevation + n * 50 < 400)	// Green
+		vcolor = vec3(0.0, 1.0, 0.0) + vec3(c);
+	else if (elevation + n * 100 < 1100) // Rock
+		vcolor = vec3(0.4, 0.4, 0.4) + vec3(c);
+	else	// Snow
+		vcolor = vec3(0.95, 0.95, 0.95) + vec3(c / 2);
+
+	// OLD:
+	// if(elevation < -.2)
+	// 	vcolor = vec3(0.2, 0.2, 1.0) + vec3(c * .25);
+	// else 
+	// 	vcolor = vec3(0.0, 1.0, 0.0) + vec3(c);
+
+	// To make sure distant traingles are culled correctly
 	// Logarithmic depth buffer 1
 	//gl_Position.z = 2.0*log(gl_Position.w/near)/log(far/near) - 1; 
- //   gl_Position.z *= gl_Position.w;
-
+    //gl_Position.z *= gl_Position.w;
 	// Logarithmic depth buffer 2
 	float C = 0.1f;
 	gl_Position.z = (2*log(C*gl_Position.w + 1) / log(C*far + 1) - 1) * gl_Position.w;   //OpenGL, depth range -1..1

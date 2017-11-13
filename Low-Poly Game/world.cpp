@@ -135,7 +135,7 @@ void World::Render() {
 	//Renderer::SetVAO(0);
 	Renderer::Render(cube);
 
-	Renderer::SetUniform("Color", 0.0f, 1.0f, 0.0f);
+	//Renderer::SetUniform("Color", 0.0f, 1.0f, 0.0f);
 	Renderer::SetUniform("model", glm::mat4());
 	ChunkManager::Render();
 	Renderer::SetShader(0);
