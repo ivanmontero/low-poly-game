@@ -113,6 +113,9 @@ void World::Update(float delta) {
 	if(chunkLoading)
 		ChunkManager::Update(Camera::GetX(), Camera::GetZ());
 
+	// To follow the terrain
+	//Camera::SetY(10 + ChunkManager::GetNoiseValue(Camera::GetX(), Camera::GetZ()));
+
 }
 
 void World::Render() {

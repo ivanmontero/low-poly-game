@@ -18,7 +18,6 @@ void main() {
 	
 	color = vec4(amb + diffuse, 1.0);
 
-
 	//if(Normal.y > 0) 
 	//	color = vec4(0.0f, 1.0f, 0.0f, 1.0f);
 	//else

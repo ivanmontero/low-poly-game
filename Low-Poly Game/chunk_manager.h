@@ -43,11 +43,13 @@ public:
 
 	static void Release();
 
+	static float GetNoiseValue(float x, float z);
+
 private:
 	static void Load(int cx, int cz);
 	static void Unload(int cx, int cz);
 	static void Generate(int cx, int cz);
-	static float GetNoiseValue(float x, float z);
+
 	static float Clamp(float n);
 };
 

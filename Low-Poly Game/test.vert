@@ -32,13 +32,13 @@ void main() {
 	float elevation = (model * vec4(position, 1.0f)).y;
 	float n = noise(vec2(position.x, position.z));
 
-	if(elevation < -5)	// Water
+	if(elevation < -7.5)	// Water
 		vcolor = vec3(0.2, 0.2, 1.0) + vec3(c * .25);
-	else if (elevation < 5) // lerp between water and sand
-		vcolor = vec3(mix(.2, 1, (elevation + 5) / 10), 
-					  mix(.2, 1, (elevation + 5) / 10),
-					  mix(.85, 1, 1 - (elevation + 5) / 10)) + vec3(c);
-	else if (elevation < 15)	// Sand
+	else if (elevation < 7.5) // lerp between water and sand
+		vcolor = vec3(mix(.2, 1, (elevation + 7.5) / 15), 
+					  mix(.2, 1, (elevation + 7.5) / 15),
+					  mix(.85, 1, 1 - (elevation + 7.5) / 15)) + vec3(c);
+	else if (elevation < 20)	// Sand
 		vcolor = vec3(1.0, 1.0, 0.85) + vec3(c);
 	else if (elevation + n * 50 < 400)	// Green
 		vcolor = vec3(0.0, 1.0, 0.0) + vec3(c);
